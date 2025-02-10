@@ -1,0 +1,149 @@
+{% extends "admin/layout.html" %}
+{% block content %}
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i>Mostrar Cliente</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content-panel">
+                    <h4><i class="fa fa-angle-right"></i> Tabla Cliente</h4>
+                    <hr>
+                    <table class="table table-bordered table-hover" id="myTable">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Cedula</th>
+                                <th>Direccion</th>
+                                <th>Telefono</th>
+                                <th>Correo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cliente in cliente %}
+                            <tr>
+                                <td>{{ cliente.nombre }}</td>
+                                <td>{{ cliente.apellido }}</td>
+                                <td>{{ cliente.cedula }}</td>
+                                <td>{{ cliente.direccion }}</td>
+                                <td>{{ cliente.telefono }}</td>
+                                <td>{{ cliente.correo }}</td>
+                                <td>
+                                    <button type="submit" class="editar btn btn-primary">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                    <a href="{{url_for('cliente.delete_cli', eliacli = cliente.cedula)}}"
+                                        class="eliminar btn btn-danger" >
+                                        <i class="fa fa-trash-o "></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </form>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </section>
+</section>
+
+<div id="editModal" title="Editar Cliente" hidden>
+    <form id="editForm" action="" method="post">
+        <div class="form-group">
+            <div class="col">
+                <label for="">Nombre</label>
+                <input type="text" id="nombre" name="nombre" class="form-control">
+            </div>
+            <div class="col">
+                <label for="usuario">Apellido</label>
+                <input type="text" id="apellido" name="apellido" class="form-control" >
+            </div>
+            <div class="col">
+                <label for="rol">Cedula </label>
+                <input type="text" id="cedula" name="cedula" class="form-control" readonly>
+            </div>
+            <div class="col">
+                <label for="rol">Direccion</label>
+                <input type="text" id="direccion" name="direccion" class="form-control">
+            </div>
+            <div class="col">
+                <label for="rol">Telefono</label>
+                <input type="text" id="telefono" name="telefono" class="form-control">
+            </div>
+            <div class="col">
+                <label for="rol">Correo</label>
+                <input type="text" id="correo" name="correo" class="form-control">
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            "language": {
+                "url": "/static/js/Spanish.json"
+            }
+        });
+        var table = $('#myTable').DataTable();
+        //Cambio de english a spanish
+        // Funcionalidad de edición
+        table.on('click', '.editar', function () {
+            var row = $(this).closest('tr');
+            var data = table.row(row).data();
+            // Aquí puedes abrir el modal y llenar los campos del formulario con los datos del usuario
+            // Por ejemplo:
+            $('#nombre').val(data[0]);
+            $('#apellido').val(data[1]);
+            $('#cedula').val(data[2]);
+            $('#direccion').val(data[3]);
+            $('#telefono').val(data[4]);
+            $('#correo').val(data[5]);
+            $('#editForm').attr('action', '/edit_cli/' + data[2]); // Recuerda que en esta parte el 0 es la posicion selectora del codigo que estas usando en este caso es 0 ya que usas la cedula
+            $('#editModal').dialog('open');
+        });
+        // Inicializar el modal
+        $('#editModal').dialog({
+            autoOpen: false,
+            modal: true,
+            buttons: [
+                {
+                    text: 'Guardar',
+                    click: function () {
+                        $('#editForm').submit();
+                    },
+                    // Agregar una clase al botón
+                    class: 'guardar'
+                },
+                {
+                    text: 'Cancelar',
+                    click: function () {
+                        $(this).dialog('close');
+                    },
+                    // Agregar una clase al botón
+                    class: 'cancelar'
+                }
+            ]
+        });
+    });
+    $(".eliminar").click(function (event) {
+        event.preventDefault();
+        var url = $(this).attr('href'); // Guarda la URL del enlace
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¿Estás seguro de que quieres eliminar?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar!',
+            cancelButtonText: 'No, cancelar!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url; // Navega a la URL del enlace
+            }
+        });
+    });
+</script>
+{% endblock %}
