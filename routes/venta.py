@@ -45,6 +45,7 @@ def get_next_sequence(name):
     )
     return result.get('seq')
 
+# Registro de ventas
 @venta.route("/admin/in_venta", methods=['GET', 'POST'])
 def adventa():
     if 'username' not in session:
@@ -53,7 +54,7 @@ def adventa():
     
     cliente = db["cliente"].find()
     producto = db["producto"].find()
-
+    servicio = db["servicio"].find()
     if request.method == 'POST':
         id_venta = str(get_next_sequence('ventaId')).zfill(1)
         venta = db["venta"]
@@ -66,7 +67,6 @@ def adventa():
         # Recoger los productos
         id_productos = request.form.getlist("id_producto")
         n_productos = request.form.getlist("n_productos")
-        colores = request.form.getlist("color")
         cantidades = request.form.getlist("cantidad")
         precios = request.form.getlist("precio")
         resultados = request.form.getlist("resultado")
@@ -75,7 +75,6 @@ def adventa():
         # Debugging
         print("ID Productos:", id_productos)
         print("Productos:", n_productos)
-        print("Colores:", colores)
         print("Cantidades:", cantidades)
         print("Precios:", precios)
         print("Resultados:", resultados)
@@ -86,7 +85,6 @@ def adventa():
             producto = {
                 "id_producto": id_productos[i] if i < len(id_productos) else '',
                 "n_producto": n_productos[i] if i < len(n_productos) else '',
-                "color": colores[i] if i < len(colores) else '',
                 "cantidad": cantidades[i] if i < len(cantidades) else '',
                 "precio": precios[i] if i < len(precios) else '',
                 "resultado": resultados[i] if i < len(resultados) else '',
@@ -124,6 +122,8 @@ def adventa():
                     # Actualizar la cantidad del producto en la base de datos
                     db["producto"].update_one({"id_producto": id_producto}, {"$set": {"cantidad": str(nueva_cantidad)}})
                     print(f"Producto {id_producto} actualizado. Nueva cantidad: {nueva_cantidad}")
+                else:
+                    print(f"Producto con id {id_producto} no encontrado, la operación continúa")
             else:
                 print(f"Cantidad no válida para el producto {id_producto}")
 
@@ -131,7 +131,7 @@ def adventa():
         return redirect(url_for('venta.adventa'))
 
     else:
-        return render_template("admin/in_venta.html", cliente=cliente, producto=producto)
+        return render_template("admin/in_venta.html", cliente=cliente, producto=producto, servicio=servicio)
 
 
 
@@ -191,7 +191,6 @@ def generar_pdf(id):
     
     # Tabla de productos
     c.drawString(50, height - 240, "Nombre de los productos")
-    c.drawString(200, height - 240, "Color")
     c.drawString(300, height - 240, "Cantidad")
     c.drawString(400, height - 240, "Precio $")
     c.drawString(500, height - 240, "Total")
@@ -199,7 +198,6 @@ def generar_pdf(id):
     y = height - 260
     for producto in cliente['productos']:
         c.drawString(50, y, producto['n_producto'])
-        c.drawString(200, y, producto['color'])
         c.drawString(300, y, str(producto['cantidad']))
         c.drawString(400, y, str(producto['precio']))
         c.drawString(500, y, str(producto['resultado']))
@@ -246,7 +244,6 @@ def generar_pdf_cliente(cliente):
     
     # Tabla de productos
     c.drawString(50, height - 240, "Nombre de los productos")
-    c.drawString(200, height - 240, "Color")
     c.drawString(300, height - 240, "Cantidad")
     c.drawString(400, height - 240, "Precio $")
     c.drawString(500, height - 240, "Total")
@@ -254,7 +251,6 @@ def generar_pdf_cliente(cliente):
     y = height - 260
     for producto in cliente['productos']:
         c.drawString(50, y, producto['n_producto'])
-        c.drawString(200, y, producto['color'])
         c.drawString(300, y, str(producto['cantidad']))
         c.drawString(400, y, str(producto['precio']))
         c.drawString(500, y, str(producto['resultado']))

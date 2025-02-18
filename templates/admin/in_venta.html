@@ -1,0 +1,212 @@
+{% extends "admin/layout.html" %}
+{% block content %}
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i>Ingresar Venta</h3>
+        <div class="row mt">
+            <div class="col-lg-12">
+                <div class="form-panel">
+                    <h4 class="mb"><i class="fa fa-angle-right"></i>Formulario</h4>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <form action="/admin/in_venta" role="form" method="post" id="dynamic-form">
+                        <div class="form-group">
+                            <label>Nombre del cliente</label>
+                            <input class="form-control nombre" name="n_cliente" type="text" readonly required>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label>Apellido</label>
+                            <input class="form-control apellido" name="n_apellido" type="text" required>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label>Direccion</label>
+                            <input class="form-control direccion" name="direccion" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>cedula</label>
+                            <input class="form-control cedula" name="cedula" type="text" readonly required>
+                        </div>
+                        <div>
+                            <button type="button" class="but1  btn-warning">Cargar cliente</button>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Fecha</label>
+                            <input class="form-control" name="fecha" type="date" required>
+                        </div>
+                        <!-- Esta parte del codigo es para crear varios inputs -->
+                        <!-- Esta parte del codigo es para crear varios inputs -->
+                        <div id="product-section-wrapper" style="max-height: 300px; overflow-y: auto;">
+                            <div id="product-section" class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group" hidden>
+                                        <label>Producto</label>
+                                        <input class="form-control p_nombre" name="n_productos" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group" hidden>
+                                        <label>Id_producto</label>
+                                        <input class="form-control id_producto" name="id_producto" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group" hidden>
+                                        <label>BD</label>
+                                        <input class="form-control cantidad" name="can" type="number">
+                                    </div>
+                                </div>
+                                <div class="col-md-3" hidden>
+                                    <div class="form-group">
+                                        <label>Cantidad</label>
+                                        <input class="form-control" name="cantidad" type="number">
+                                    </div>
+                                </div>
+                                <div class="col-md-3" hidden>
+                                    <div class="form-group">
+                                        <label>Precio</label>
+                                        <input class="form-control precio" name="precio" type="number">
+                                    </div>
+                                </div>
+                                <div class="col-md-3" hidden>
+                                    <div class="form-group">
+                                        <label>Resultado</label>
+                                        <input class="form-control" name="resultado" type="number">
+                                    </div>
+                                </div>
+                                <div class="col-md-3" hidden>
+                                    <button type="button" class="btn btn-danger delete-product">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary but2">
+                                        <i class="glyphicon glyphicon-list-alt"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-info but3">
+                                        <i class="glyphicon glyphicon-list-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Aqui termina el codigo  -->
+                        <!-- Aqui termina el codigo  -->
+                        <br>
+                        <div class="form-group">
+                            <label>Total</label>
+                            <input class="form-control" name="total" type="number" readonly>
+                        </div>
+                        <button type="button" class="btn btn-success" id="add-product-btn"><i
+                                class="glyphicon glyphicon-plus"></i></button>
+                        <button type="submit" class="btn btn-warning">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<div class="mosecliente" hidden>
+    <table class="table table-bordered table-hover" id="myTable">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Cedula</th>
+                <th>Direccion</th>
+                <th>Selector</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in cliente %}
+            <tr>
+                <td class="valor1">
+                    {{ cliente.nombre }}
+                </td>
+                <td class="valor2">
+                    {{ cliente.apellido }}
+                </td>
+                <td class="valor3">
+                    {{ cliente.cedula }}
+                </td>
+                <td class="valor4">
+                    {{ cliente.direccion }}
+                </td>
+                <td>
+                    <button type="button">Seleccionar</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="moseproducto" hidden>
+    <table class="table table-bordered table-hover" id="myTable2">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Nombre producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Selector</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in producto %}
+            <tr>
+                <td class="var1">
+                    {{producto.id_producto}}
+                </td>
+                <td class="var2">
+                    {{producto.nombre}}
+                </td>
+                <td class="var4">
+                    {{producto.cantidad}}
+                </td>
+                <td class="var5">
+                    {{producto.precio}}
+                </td>
+                <td>
+                    <button type="button">Seleccionar</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="moseservicio" hidden>
+    <table class="table table-bordered table-hover" id="myTable3">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Nombre del servicio</th>
+                <th>Precio</th>
+                <th>Selector</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for servicio in servicio %}
+            <tr>
+                <td>
+                    {{servicio.id_servicio}}
+                </td>
+                <td class="ser1">
+                    {{servicio.nombre}}
+                </td>
+                <td class="ser2">
+                    {{servicio.precio}}
+                </td>
+                <td>
+                    <button type="button">Seleccionar</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script src="/static/js/admin/in_venta.js"></script>
+{% endblock %}

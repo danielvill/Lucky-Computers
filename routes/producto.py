@@ -47,13 +47,12 @@ def adpro():
         producto = db["producto"]
         nombre = request.form['nombre']
         precio = request.form['precio']
-        color = request.form['color']
         cantidad = request.form['cantidad']
 
-        exist_nombre_color = producto.find_one({"nombre": nombre, "color": color})
+        exist_nombre_color = producto.find_one({"nombre": nombre})
 
         if exist_nombre_color:
-            flash("El nombre del producto y el color ya existen", "danger")
+            flash("El nombre del producto  ya existen", "danger")
             return redirect(url_for('producto.adpro'))
 
         else:
@@ -70,7 +69,7 @@ def adpro():
                 file.save(file_path)
                 imagen_filename = filename
             
-            produc = Producto(id_producto, nombre, precio, color, imagen_filename, cantidad)
+            produc = Producto(id_producto, nombre, precio, imagen_filename, cantidad)
             producto.insert_one(produc.ProductoDBCollection())
             flash("Producto agregado correctamente" , "success")
             return redirect(url_for('producto.adpro'))
@@ -91,7 +90,6 @@ def edit_pro(edipro):
         id_producto = request.form["id_producto"]
         nombre = request.form["nombre"]
         precio = request.form["precio"]
-        color = request.form["color"]
         cantidad = request.form["cantidad"]
 
         if "imagen" in request.files and request.files['imagen'].filename != '':
@@ -104,7 +102,7 @@ def edit_pro(edipro):
         else:
             imagen_filename = producto_existente['imagen']
 
-        campos = [id_producto, nombre, precio, color, cantidad]
+        campos = [id_producto, nombre, precio, cantidad]
 
         try:
             if all(campos):
@@ -112,7 +110,7 @@ def edit_pro(edipro):
                     "id_producto": id_producto,
                     "nombre": nombre,
                     "precio": precio,
-                    "color": color,
+                    
                     "cantidad": cantidad,
                     "imagen": imagen_filename
                 }})

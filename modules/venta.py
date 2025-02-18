@@ -7,7 +7,6 @@ class Venta:
         self.cedula=cedula
         self.fecha=fecha
         self.n_productos=n_productos
-        
         self.cantidad=cantidad
         self.precio=precio
         self.resultado=resultado

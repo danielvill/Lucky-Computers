@@ -16,7 +16,7 @@ from routes.producto import producto
 from routes.venta import venta
 from routes.servicio import servicio
 from flask import Flask
-from mail_config import mail
+from mail_config import mail # pip install flask-mail
 # El siguiente es para usar lo que es pug 
 from jinja2 import Environment, FileSystemLoader# pip install Flask Jinja2
 import os
@@ -115,6 +115,8 @@ app.register_blueprint(cliente)
 
 # *Codigo de ingreso de producto
 app.register_blueprint(producto)
+
+
 
 # Importar y registrar venta después de inicializar mail
 # Importar y registrar Blueprint después de inicializar mail

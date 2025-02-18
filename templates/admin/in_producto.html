@@ -1,0 +1,51 @@
+{% extends "admin/layout.html" %}
+{% block content %}
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i>Ingresar Producto</h3>
+        <div class="row mt">
+            <div class="col-lg-12">
+                <div class="form-panel">
+                    <h4 class="mb"><i class="fa fa-angle-right"></i>Formulario</h4>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <form action="/admin/in_producto" class="form-horizontal style-form" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Ingresar nombre del producto</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="nombre" class="form-control" placeholder="Eje : computadora">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Ingresar Precio $</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="precio" class="form-control" placeholder="$">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Ingresar Cantidad</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="cantidad" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Ingresar Imagen</label>
+                            <div class="col-sm-10">
+                                <input type="file" name="imagen" class="form-control">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-theme">Registrar</button>
+                    </form>
+                </div>
+            </div><!-- col-lg-12-->
+        </div><!-- /row -->
+    </section>
+</section>
+{% endblock %}

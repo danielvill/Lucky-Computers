@@ -30,8 +30,13 @@
     <link rel="stylesheet" href="/static/css/messege.css">
     <link rel="stylesheet" href="/static/css/modal.css">
 
+    <script src="/static/assets/js/jquery.js"></script>
 
     <script src="/static/assets/js/chart-master/Chart.js"></script>
+    <!-- DATATABLES SCRIPTS -->
+    <script src="/static/js/dataTables/jquery.dataTables.js"></script>
+    <script src="/static/js/dataTables/dataTables.bootstrap.js"></script>
+    <link rel="stylesheet" href="/static/assets/css/messege.css">   
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -229,7 +234,7 @@
 
                     <li class="sub-menu">
                         <a href="javascript:;">
-                            <i class="fa fa-desktop"></i>
+                            <i class="fa fa-users"></i>
                             <span>Clientes</span>
                         </a>
                         <ul class="sub">
@@ -240,56 +245,34 @@
 
                     <li class="sub-menu">
                         <a href="javascript:;">
-                            <i class="fa fa-cogs"></i>
-                            <span>Components</span>
+                            <i class="fa fa-desktop"></i>
+                            <span>Productos</span>
                         </a>
                         <ul class="sub">
-                            <li><a href="calendar.html">Calendar</a></li>
-                            <li><a href="gallery.html">Gallery</a></li>
-                            <li><a href="todo_list.html">Todo List</a></li>
+                            <li><a href="./in_producto">Ingresar productos</a></li>
+                            <li><a href="./producto">Mostrar Producto</a></li>
                         </ul>
                     </li>
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="fa fa-book"></i>
-                            <span>Extra Pages</span>
+                            <span>Servicio</span>
                         </a>
                         <ul class="sub">
-                            <li><a href="blank.html">Blank Page</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="lock_screen.html">Lock Screen</a></li>
+                            <li><a href="./in_servicio">Ingresar Servicio</a></li>
+                            <li><a href="./servicio">Mostrar Servicio</a></li>
                         </ul>
                     </li>
                     <li class="sub-menu">
                         <a href="javascript:;">
-                            <i class="fa fa-tasks"></i>
-                            <span>Forms</span>
+                            <i class="fa fa-file-text"></i>
+                            <span>Ventas</span>
                         </a>
                         <ul class="sub">
-                            <li><a href="form_component.html">Form Components</a></li>
+                            <li><a href="./in_venta">Ingresar Venta</a></li>
+                            <li><a href="./venta">Mostrar venta</a></li>
                         </ul>
                     </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;">
-                            <i class="fa fa-th"></i>
-                            <span>Data Tables</span>
-                        </a>
-                        <ul class="sub">
-                            <li><a href="basic_table.html">Basic Table</a></li>
-                            <li><a href="responsive_table.html">Responsive Table</a></li>
-                        </ul>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;">
-                            <i class=" fa fa-bar-chart-o"></i>
-                            <span>Charts</span>
-                        </a>
-                        <ul class="sub">
-                            <li><a href="morris.html">Morris</a></li>
-                            <li><a href="chartjs.html">Chartjs</a></li>
-                        </ul>
-                    </li>
-
                 </ul>
                 <!-- sidebar menu end-->
             </div>
@@ -307,9 +290,9 @@
         <!--footer end-->
     </section>
 
+
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="/static/assets/js/jquery.js"></script>
-    <script src="/static/assets/js/jquery-1.8.3.min.js"></script>
     <script src="/static/assets/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="/static/assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="/static/assets/js/jquery.scrollTo.min.js"></script>
@@ -334,10 +317,9 @@
     <!-- DATATABLES SCRIPTS -->
     <script src="/static/js/dataTables/jquery.dataTables.js"></script>
     <script src="/static/js/dataTables/dataTables.bootstrap.js"></script>
-    
+
     <!-- SWEETALERT SCRIPTS -->
     <script src="/static/js/sweetalert211.js"></script>
-
 
     <script type="text/javascript">
         $(document).ready(function () {
