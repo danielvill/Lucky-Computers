@@ -45,7 +45,7 @@ def adser():
             return redirect(url_for('servicio.adser'))
         
         servicio.insert_one({"id_servicio": id_servicio, "nombre": nombre, "precio": precio, "comentario": comentario})
-        flash("Servicio agregado correctamente")
+        flash("Servicio agregado correctamente","success")
         return redirect(url_for('servicio.adser'))
     else:
         return render_template('admin/in_servicio.html')

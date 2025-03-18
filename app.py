@@ -20,7 +20,7 @@ from mail_config import mail # pip install flask-mail
 # El siguiente es para usar lo que es pug 
 from jinja2 import Environment, FileSystemLoader# pip install Flask Jinja2
 import os
-
+from routes.chart import chart_pb
 
 db = dbase()
 app = Flask(__name__)
@@ -71,7 +71,8 @@ def crear_backup():
         for venta in venta_data:
             json.dump(venta, venta_file)
             venta_file.write('\n')
-    return redirect(url_for('completo'))
+    return redirect(url_for('chart.chart'))
+
 
 # todo : Tengo que terminar bien la animacion para el respaldo a la base de datos 
 
@@ -99,7 +100,7 @@ def index():
         usuario_fo = db.admin.find_one({'user':usuario,'contraseña':password})
         if usuario_fo:
             session["username"]= usuario
-            return redirect(url_for('cliente.adcli'))
+            return redirect(url_for('chart.chart'))
         else:
             flash("Contraseña incorrecta")
             return redirect(url_for('index'))
@@ -115,6 +116,10 @@ app.register_blueprint(cliente)
 
 # *Codigo de ingreso de producto
 app.register_blueprint(producto)
+
+# *Codigo de ingreso de chart
+app.register_blueprint(chart_pb)
+
 
 
 

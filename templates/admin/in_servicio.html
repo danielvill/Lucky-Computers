@@ -20,19 +20,19 @@
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">Ingresar nombre del servicio</label>
                             <div class="col-sm-10">
-                                <input type="text" name="nombre" class="form-control" placeholder="Eje : Arreglo de CPU">
+                                <input type="text" name="nombre" class="form-control" placeholder="Eje : Arreglo de CPU" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">Ingresar Precio</label>
                             <div class="col-sm-10">
-                                <input type="number" name="precio" class="form-control" placeholder="$">
+                                <input type="number" name="precio" class="form-control" placeholder="$" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">Ingresar Comentario</label>
                             <div class="col-sm-10">
-                                <textarea type="text" name="comentario" class="form-control" placeholder="Eje  : La limpieza tiene que incluir con pasta termica"></textarea>
+                                <textarea type="text" name="comentario" class="form-control" placeholder="Eje  : La limpieza tiene que incluir con pasta termica" required></textarea >
                             </div>
                         </div>
                         <button type="submit" class="btn btn-theme">Registrar</button>
@@ -42,4 +42,5 @@
         </div><!-- /row -->
     </section>
 </section>
+<script src="/static/js/admin/producto.js"></script>
 {% endblock %}

@@ -178,7 +178,7 @@ def generar_pdf(id):
     
     # Título
     c.setFont("Helvetica-Bold", 20)
-    c.drawCentredString(width / 2.0, height - 50, "MODAMENSPLUS")
+    c.drawCentredString(width / 2.0, height - 50, "LUCKYCOMPUTERS")
     
     # Detalles del cliente
     c.setFont("Helvetica", 12)
@@ -231,7 +231,7 @@ def generar_pdf_cliente(cliente):
     
     # Título
     c.setFont("Helvetica-Bold", 20)
-    c.drawCentredString(width / 2.0, height - 50, "MODAMENSPLUS")
+    c.drawCentredString(width / 2.0, height - 50, "LUCKYCOMPUTERS")
     
     # Detalles del cliente
     c.setFont("Helvetica", 12)
@@ -273,7 +273,7 @@ def enviar_correo_cliente(correo, pdf_buffer, nombre_cliente):
             subject="Gracias por tu compra",
             sender="tu_correo@example.com",  # Remitente
             recipients=[correo],  # Destinatario
-            body=f"Hola {nombre_cliente},\n\nGracias por tu compra. Adjuntamos tu factura en PDF.\n\nSaludos,\nMODAMENSPLUS"
+            body=f"Hola {nombre_cliente},\n\nGracias por tu compra. Adjuntamos tu factura en PDF.\n\nSaludos,\nLUCKYCOMPUTERS"
         )
         
         # Adjuntar el PDF

@@ -1,5 +1,5 @@
 #editModal {
-    background-color: #202020;
+    background-color: #424A5D;
     color: white;
     /* Este color es opcional, para cambiar el texto a blanco */
     padding: 20px;
@@ -9,18 +9,18 @@
 }
 
 .guardar {
-    background-color: green;
-    color: white;
+    background-color: #FFD777;
+    color: black;
 }
 
 .cancelar {
-    background-color: red;
-    color: white;
+    background-color: #68DFF0;
+    color: black;
 }
 
 /* Cambiar el color de la "X" */
 .ui-dialog-titlebar-close {
-    color: red;
+    color: #68DFF0;
     /* Cambia 'red' por el color que desees */
     font-size: 20px;
     /* Ajusta el tamaño si es necesario */
@@ -30,6 +30,6 @@
 
 /* Agregar un fondo de color si es necesario */
 .ui-dialog-titlebar-close:hover {
-    background-color: red;
+    background-color: #68DFF0;
     /* Cambia el fondo al pasar el mouse por encima */
 }

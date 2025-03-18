@@ -1,0 +1,170 @@
+{% extends "admin/layout.html" %}
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> Chartjs Charts</h3>
+        <!-- page start-->
+        <div class="tab-pane" id="chartjs">
+            <div class="row mt">
+                <div class="col-lg-6">
+                    <div class="content-panel">
+                        <h4><i class="fa fa-angle-right"></i>Ventas mensuales </h4>
+                        <div class="panel-body text-center" >
+                            <div hidden>
+                                <table class="table table-bordered table-hover" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Mes</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for venta in venta %}
+                                        <tr>
+                                            <td>
+                                                {{ venta.fecha }}
+                                            </td>
+                                            <td class="mes">
+    
+                                            </td>
+                                            <td>
+                                                {{ venta.productos[0].total }}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <canvas id="myChart" height="300" width="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="content-panel">
+                        <h4><i class="fa fa-angle-right"></i>Productos</h4>
+                        <div class="panel-body text-center">
+                            <div hidden >
+                                <table class="table table-bordered table-hover" id="myTable2">
+                                    <thead>
+                                        <tr>
+                                            <th>Codigo</th>
+                                            <th>Nombre</th>
+                                            <th>Cantidad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for producto in producto %}
+                                        <tr>
+                                            <td>
+                                                {{producto.id_producto}}
+                                            </td>
+                                            <td>
+                                                {{producto.nombre}}
+                                            </td>
+                                            <td >
+                                                {{producto.cantidad}}
+                                            </td>
+                                        </tr>
+                                        
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <canvas id="myDoughnutChart" height="300" width="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt">
+                <div class="col-lg-6">
+                    <div class="content-panel">
+                        <h4><i class="fa fa-angle-right"></i>Producto más vendido</h4>
+                        <div class="panel-body text-center">
+                            <div  hidden>
+                                <table class="table table-bordered table-hover" id="myTable3">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Mes</th>
+                                            <th>Nombre</th>
+                                            <th>Cantidad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for principal in principal %}
+                                        <tr>
+                                            <td>
+                                                {{principal.fecha}}
+                                            </td>
+                                            <td class="moth">
+
+                                            </td>
+                                            <td>
+                                                {{principal.productos[1].n_producto}}
+                                            </td>
+                                            <td >
+                                                {{principal.productos[1].cantidad}}
+                                            </td>
+                                        </tr>
+                                        
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <canvas id="myChart3" height="300" width="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="content-panel">
+                        <h4><i class="fa fa-angle-right"></i>Compras de clientes</h4>
+                        <div class="panel-body text-center">
+                            <div hidden >
+                                <table class="table table-bordered table-hover" id="myTable4">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Mes</th>
+                                            <th>Cliente</th>
+                                            <th>Cedula</th>
+                                            <th>Cantidad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for cliente in cliente %}
+                                        <tr>
+                                            <td>
+                                                {{cliente.fecha}}
+                                            </td>
+                                            <td class="mensual">
+
+                                            </td>
+                                            <td>
+                                                {{cliente.n_cliente}}
+                                            </td>
+                                            <td>
+                                                {{cliente.cedula}}
+                                            </td>
+                                            <td >
+                                                {{cliente.productos[0].total}}
+                                            </td>
+                                        </tr>
+                                        
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <canvas id="polarArea" height="300" width="400"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- page end-->
+    </section>
+</section><!-- /MAIN CONTENT -->
+
+<script src="/static/js/resumen/chart1.js"></script>
+{% endblock %}
