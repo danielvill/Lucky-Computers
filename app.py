@@ -21,7 +21,7 @@ from mail_config import mail # pip install flask-mail
 from jinja2 import Environment, FileSystemLoader# pip install Flask Jinja2
 import os
 from routes.chart import chart_pb
-
+from routes.marca import marca
 db = dbase()
 app = Flask(__name__)
 app.secret_key = 'luky105'
@@ -120,7 +120,8 @@ app.register_blueprint(producto)
 # *Codigo de ingreso de chart
 app.register_blueprint(chart_pb)
 
-
+# Marcas
+app.register_blueprint(marca)
 
 
 # Importar y registrar venta después de inicializar mail

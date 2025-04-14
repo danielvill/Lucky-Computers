@@ -63,6 +63,7 @@ def adventa():
         direccion = request.form["direccion"]
         cedula = request.form["cedula"]
         fecha = request.form["fecha"]
+        hora = request.form["hora"]
         
         # Recoger los productos
         id_productos = request.form.getlist("id_producto")
@@ -100,6 +101,7 @@ def adventa():
             "direccion": direccion,
             "cedula": cedula,
             "fecha": fecha,
+            "hora": hora,
             "productos": productos
         }
         

@@ -2,7 +2,7 @@
 {% block content %}
 <section id="main-content">
     <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i>Ingresar Venta</h3>
+        <h3><i class="fa fa-angle-right"></i>Visualizar Venta</h3>
         <div class="row mt">
             <div class="col-lg-12">
                 <div class="form-panel">
@@ -19,8 +19,11 @@
                     <table class="table table-bordered table-hover" id="myTable">
                         <thead>
                             <tr>
-                                <th>Id venta</th>
+                                <th>Cedula</th>
+                                <th>Nombre</th>
                                 <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Total</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -28,10 +31,19 @@
                             {% for venta in venta %}
                             <tr>
                                 <td>
-                                    {{ venta.id_venta }}
+                                    {{ venta.cedula }}
+                                </td>
+                                <td>
+                                    {{ venta.n_cliente }}
                                 </td>
                                 <td>
                                     {{ venta.fecha }}
+                                </td>
+                                <td>
+                                    {{ venta.hora }}
+                                </td>
+                                <td>
+                                    {{ venta.productos[0].total }}
                                 </td>
                                 <td>
                                     <a href="{{ url_for('venta.v_cliente', id=venta._id) }}">

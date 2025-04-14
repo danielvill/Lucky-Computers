@@ -42,10 +42,12 @@ def adpro():
         flash("Inicia sesion con tu usuario y contraseña")
         return redirect(url_for('user.index'))
     
+    marcas = db['marca'].find()
     if request.method == 'POST':
         id_producto = str(get_next_sequence('productoId')).zfill(3)
         producto = db["producto"]
         nombre = request.form['nombre']
+        marca = request.form['marca']
         precio = request.form['precio']
         cantidad = request.form['cantidad']
 
@@ -69,13 +71,13 @@ def adpro():
                 file.save(file_path)
                 imagen_filename = filename
             
-            produc = Producto(id_producto, nombre, precio, imagen_filename, cantidad)
+            produc = Producto(id_producto, nombre,marca, precio, imagen_filename, cantidad)
             producto.insert_one(produc.ProductoDBCollection())
             flash("Producto agregado correctamente" , "success")
             return redirect(url_for('producto.adpro'))
 
     else:
-        return render_template('admin/in_producto.html')
+        return render_template('admin/in_producto.html',marcas = marcas)
 
 # Editar Producto
 @producto.route('/edit_pro/<string:edipro>', methods=['GET', 'POST'])

@@ -1,11 +1,12 @@
 class Venta:
-    def __init__(self,id_venta,n_cliente,n_apellido,direccion,cedula,fecha,n_productos,cantidad,precio,resultado,total):
+    def __init__(self,id_venta,n_cliente,n_apellido,direccion,cedula,fecha,hora,n_productos,cantidad,precio,resultado,total):
         self.id_venta=id_venta
         self.n_cliente=n_cliente
         self.n_apellido=n_apellido
         self.direccion=direccion
         self.cedula=cedula
         self.fecha=fecha
+        self.hora=hora
         self.n_productos=n_productos
         self.cantidad=cantidad
         self.precio=precio
@@ -21,6 +22,7 @@ class Venta:
             'direccion': self.direccion,
             'cedula': self.cedula,
             'fecha': self.fecha,
+            'hora': self.hora,
             'n_productos': self.n_productos,
             'cantidad': self.cantidad,
             'precio': self.precio,
