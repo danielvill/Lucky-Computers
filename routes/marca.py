@@ -84,3 +84,12 @@ def v_marca():
     marcas = db['marca'].find()
     return render_template('admin/marca.html', marcas=marcas)
 
+# Mostrar marcas
+@marca.route('/user/marca', methods=['GET'])
+def u_marca():
+    if 'username' not in session:
+        flash("Inicia sesion con tu usuario y contraseña")
+        return redirect(url_for('marca.index'))
+    marcas = db['marca'].find()
+    return render_template('/user/marca.html', marcas=marcas)
+

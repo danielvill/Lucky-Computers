@@ -1,4 +1,4 @@
-{% extends "admin/layout.html" %}
+{% extends "user/layout.html" %}
 {% block content %}
 <section id="main-content">
     <section class="wrapper">
@@ -15,7 +15,7 @@
                                 <th>Nombre</th>
                                 <th>Proveedor</th>
                                 <th>Comentario</th>
-                                <th>Acciones</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -33,17 +33,9 @@
                                 <td>
                                     {{marcas.comentario}}
                                 </td>
-                                <td>
-                                    <button type="submit" class="editar btn ">
-                                        <i class="fa fa-pencil"></i>
-                                    </button>
-                                    <a href="{{url_for('marca.del_marca', delmarca = marcas.id_marca)}}"
-                                        class="eliminar btn btn-danger">
-                                        <i class="fa fa-trash-o "></i>
-                                    </a>
-                                </td>
+                                
                             </tr>
-                            </form>
+                            
                             {% endfor %}
                         </tbody>
                     </table>

@@ -22,7 +22,10 @@ from jinja2 import Environment, FileSystemLoader# pip install Flask Jinja2
 import os
 from routes.chart import chart_pb
 from routes.marca import marca
+from routes.entrega import entrega
+from routes.user import user
 db = dbase()
+
 app = Flask(__name__)
 app.secret_key = 'luky105'
 app.config['UPLOAD_FOLDER'] = 'D:/Lucky computers/static/assets/img'
@@ -98,15 +101,23 @@ def index():
         usuario = request.form['user']
         password = request.form['contraseña']
         usuario_fo = db.admin.find_one({'user':usuario,'contraseña':password})
+        cliente = db.user.find_one({'user':usuario,'contraseña':password})
+        
         if usuario_fo:
             session["username"]= usuario
             return redirect(url_for('chart.chart'))
+        elif cliente:
+            session["username"] = cliente['user']
+            return redirect(url_for('entrega.inentrada'))
         else:
             flash("Contraseña incorrecta")
             return redirect(url_for('index'))
     else:
         return render_template('index.html')
     
+
+# Codigo para user
+app.register_blueprint(user)
 
 # Codigo para servicios
 app.register_blueprint(servicio)
@@ -123,6 +134,10 @@ app.register_blueprint(chart_pb)
 # Marcas
 app.register_blueprint(marca)
 
+# Entrega
+
+app.register_blueprint(entrega)
+ 
 
 # Importar y registrar venta después de inicializar mail
 # Importar y registrar Blueprint después de inicializar mail

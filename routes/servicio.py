@@ -86,3 +86,12 @@ def v_ser():
     servicio = db['servicio'].find()
     return render_template("admin/servicio.html", servicio=servicio)
 
+# Visualizar servicio
+@servicio.route("/user/servicio")
+def u_ser():
+    if 'username' not in session:
+        flash("Inicia sesion con tu usuario y contraseña")
+        return redirect(url_for('servivio.index'))
+    servicio = db['servicio'].find()
+    return render_template("user/servicio.html", servicio=servicio)
+

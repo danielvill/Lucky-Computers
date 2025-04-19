@@ -1,0 +1,195 @@
+{% extends "user/layout.html" %}
+{% block content %}
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i>Ingresar Maquinaria</h3>
+        <div class="row mt">
+            <div class="col-lg-12">
+                <div class="form-panel">
+                    <h4 class="mb"><i class="fa fa-angle-right"></i>Formulario</h4>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <form action="/user/in_entrada" class="form-horizontal style-form" method="post"
+                        enctype="multipart/form-data">
+                        <div class="form-group"hidden>
+                            <label class="col-sm-2 col-sm-2 control-label" >Ingresar id de entrada</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="in_entrada" value=" " class="form-control"
+                                    placeholder="Nombre del producto">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label ">Nombre del cliente</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="nombre" class="form-control nombre" placeholder="" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Apellido</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="apellido" class="form-control apellido" placeholder="" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Ingresar Cedula</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="cedula" class="form-control cedula" placeholder="" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Celular</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="telefono" class="form-control direccion" placeholder="" readonly>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="button" class="but1  btn-warning">Cargar cliente</button>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Problema</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="problema" class="form-control " placeholder="" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Fecha de ingreso</label>
+                            <div class="col-sm-10">
+                                <input type="date" name="fecha" id="fecha" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Hora de ingreso</label>
+                            <div class="col-sm-10">
+                                <input type="time" id="hora" name="hora" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Imagen</label>
+                            <div class="col-sm-10">
+                                <input type="file" name="imagen" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Comentario</label>
+                            <div class="col-sm-10">
+                                <textarea type="" name="comentario" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-theme">Registrar</button>
+                    </form>
+                </div>
+            </div><!-- col-lg-12-->
+        </div><!-- /row -->
+    </section>
+</section>
+<script src="/static/js/admin/producto.js">
+</script>
+
+<div class="mosecliente" hidden>
+    <table class="table table-bordered table-hover" id="myTable">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Cedula</th>
+                <th>Celular</th>
+                <th>Selector</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in cliente %}
+            <tr>
+                <td class="valor1">
+                    {{ cliente.nombre }}
+                </td>
+                <td class="valor2">
+                    {{ cliente.apellido }}
+                </td>
+                <td class="valor3">
+                    {{ cliente.cedula }}
+                </td>
+                <td class="valor4">
+                    {{ cliente.telefono }}
+                </td>
+                <td>
+                    <button type="button">Seleccionar</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+    $('#myTable').DataTable({
+    "language": {
+        "url": "/static/js/Spanish.json"
+    }
+});
+    $(document).ready(function () {
+    // Para el primer botón
+    $('.but1').click(function () {
+        $('.mosecliente').dialog({
+            title: "Seleccionar Cliente",
+            width: 500,
+            modal: true
+        });
+    });
+
+
+});
+
+
+// Copia los datos de una celda para otra
+$(document).ready(function () {
+    $('#myTable tbody').on('click', 'button', function () {
+        var row = $(this).closest('tr');
+        var nombre = $.trim(row.find('.valor1').text());
+        var apellido = $.trim(row.find('.valor2').text());
+        var cedula = $.trim(row.find('.valor3').text());
+        var direccion = $.trim(row.find('.valor4').text());
+
+        $('.nombre').val(nombre);
+        $('.apellido').val(apellido);
+        $('.cedula').val(cedula);
+        $('.direccion').val(direccion);
+    });
+});
+
+  // Obtener el elemento de entrada
+  const inputHora = document.getElementById("hora");
+
+// Crear una función para establecer la hora actual
+const establecerHoraActual = () => {
+    const ahora = new Date();
+    const horas = ahora.getHours().toString().padStart(2, "0"); // Asegurarse de que sean dos dígitos
+    const minutos = ahora.getMinutes().toString().padStart(2, "0"); // Asegurarse de que sean dos dígitos
+    inputHora.value = `${horas}:${minutos}`; // Establecer el valor del input
+};
+
+// Ejecutar la función cuando se cargue la página
+establecerHoraActual();
+
+
+$(document).ready(function() {
+    // Obtener la fecha actual de la persona 
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //Enero es 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("fecha").setAttribute("min", today);
+    document.getElementById("fecha").setAttribute("max", today);
+});
+</script>
+{% endblock %}

@@ -1,47 +1,36 @@
-{% extends "admin/layout.html" %}
+{% extends "user/layout.html" %}
 {% block content %}
 <section id="main-content">
     <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i>Mostrar Marcas</h3>
+        <h3><i class="fa fa-angle-right"></i>Mostrar Producto</h3>
         <div class="row">
             <div class="col-md-12">
                 <div class="content-panel">
-                    <h4><i class="fa fa-angle-right"></i> Tabla Marcas</h4>
+                    <h4><i class="fa fa-angle-right"></i> Tabla Producto</h4>
                     <hr>
                     <table class="table table-bordered table-hover" id="myTable">
                         <thead>
                             <tr>
                                 <th>Codigo</th>
                                 <th>Nombre</th>
-                                <th>Proveedor</th>
-                                <th>Comentario</th>
-                                <th>Acciones</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Imagen</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
-                            {% for marcas in marcas %}
+                            {% for producto in producto %}
                             <tr>
+                                <td>{{ producto.id_producto }}</td>
+                                <td>{{ producto.nombre }}</td>
+                                <td>{{ producto.precio }}</td>
+                                <td>{{ producto.cantidad }}</td>
                                 <td>
-                                    {{marcas.id_marca}}
+                                    <img src="{{ url_for('static', filename='assets/img/' + producto.imagen) }}" alt="Imagen de herramienta" width="50">
+                            
                                 </td>
-                                <td>
-                                    {{marcas.nombre}}
-                                </td>
-                                <td>
-                                    {{marcas.proveedor}}
-                                </td>
-                                <td>
-                                    {{marcas.comentario}}
-                                </td>
-                                <td>
-                                    <button type="submit" class="editar btn ">
-                                        <i class="fa fa-pencil"></i>
-                                    </button>
-                                    <a href="{{url_for('marca.del_marca', delmarca = marcas.id_marca)}}"
-                                        class="eliminar btn btn-danger">
-                                        <i class="fa fa-trash-o "></i>
-                                    </a>
-                                </td>
+                                
                             </tr>
                             </form>
                             {% endfor %}
@@ -52,29 +41,6 @@
     </section>
 </section>
 
-<div id="editModal" title="Editar Marca" hidden>
-    <form id="editForm" action="" method="post">
-        <div class="form-group">
-
-            <div class="col" hidden>
-                <label for="">Codigo de producto</label>
-                <input type="text" id="id_marca" name="id_marca" class="form-control" readonly>
-            </div>
-            <div class="col">
-                <label for="">Nombre</label>
-                <input type="text" id="nombre" name="nombre" class="form-control" readonly>
-            </div>
-            <div class="col">
-                <label for="usuario">Proveedor</label>
-                <input type="text" id="proveedor" name="proveedor" class="form-control">
-            </div>
-            <div class="col">
-                <label for="usuario">Comentario</label>
-                <input type="text" id="comentario" name="comentario" class="form-control" readonly>
-            </div>
-        </div>
-    </form>
-</div>
 <script>
 
     $(document).ready(function () {
@@ -91,11 +57,12 @@
             var data = table.row(row).data();
             // Aquí puedes abrir el modal y llenar los campos del formulario con los datos del usuario
             // Por ejemplo:
-            $('#id_marca').val(data[0]);
+            $('#id_producto').val(data[0]);
             $('#nombre').val(data[1]);
-            $('#proveedor').val(data[2]);
-            $('#comentario').val(data[3]);
-            $('#editForm').attr('action', '/edit_marca/' + data[0]); // Recuerda que en esta parte el 0 es la posicion selectora del codigo que estas usando en este caso es 0 ya que usas la cedula
+            $('#precio').val(data[2]);
+            $('#cantidad').val(data[3]);
+            $('#imagen').val(data[4]);
+            $('#editForm').attr('action', '/edit_pro/' + data[0]); // Recuerda que en esta parte el 0 es la posicion selectora del codigo que estas usando en este caso es 0 ya que usas la cedula
             $('#editModal').dialog('open');
         });
         // Inicializar el modal

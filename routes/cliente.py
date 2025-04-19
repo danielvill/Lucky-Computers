@@ -82,3 +82,13 @@ def v_cli():
         return redirect(url_for('cliente.index'))
     cliente = db['cliente'].find()
     return render_template("admin/cliente.html", cliente=cliente)
+
+# Visualizar usuario clientes
+@cliente.route("/user/cliente")
+def u_cli():
+    if 'username' not in session:
+        flash("Inicia sesion con tu usuario y contraseña")
+        return redirect(url_for('cliente.index'))
+    cliente = db['cliente'].find()
+    return render_template("user/cliente.html", cliente=cliente)
+

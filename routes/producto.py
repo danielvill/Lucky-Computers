@@ -150,4 +150,13 @@ def v_product():
     producto = db["producto"].find()
     return render_template('admin/producto.html', producto=producto)
 
+# Visualizar producto usuario
+@producto.route("/user/producto")
+def u_product():
+    if 'username' not in session:
+        flash("Inicia sesion con tu usuario y contraseña")
+        return redirect(url_for('producto.index'))
+    producto = db["producto"].find()
+    return render_template('user/producto.html', producto=producto)
+
 
