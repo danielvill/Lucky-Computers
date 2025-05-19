@@ -33,6 +33,16 @@ def chart():
     venta = db ["venta"].find()
     principal = db ["venta"].find()
     cliente = db["venta"].find()
+    total_clientes = db['cliente'].count_documents({})
+    total_productos = db['producto'].count_documents({})
+    total_ventas = db['venta'].count_documents({})
+    total_marca = db['marca'].count_documents({})
+    total_servicio = db['servicio'].count_documents({})
 
-    return render_template('admin/chart.html', producto=producto,venta=venta,principal=principal,cliente=cliente)
+    return render_template('admin/chart.html', producto=producto,venta=venta,principal=principal,cliente=cliente,total_clientes=total_clientes,
+                            total_productos=total_productos,
+                            total_ventas=total_ventas,
+                            total_marca=total_marca,
+                            total_servicio=total_servicio)
+
 

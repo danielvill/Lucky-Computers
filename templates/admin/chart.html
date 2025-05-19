@@ -3,14 +3,53 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <section id="main-content">
     <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Chartjs Charts</h3>
+        <h3><i class="fa fa-angle-right"></i>Resumenes</h3>
         <!-- page start-->
+        <div class="row mtbox">
+            <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+                <div class="box1">
+                    <span class="bi bi-person-standing"></span>
+                    <h3>Clientes</h3>
+                </div>
+                <p>Cantidad de clientes : 
+                    <strong>{{ total_clientes }}</strong></p>
+            </div>
+            <div class="col-md-2 col-sm-2 box0">
+                <div class="box1">
+                    <span class="bi bi-box2-fill"></span>
+                    <h3>Productos</h3>
+                </div>
+                <p>Cantidad en  productos: <strong>{{ total_productos }}</strong> </p>
+            </div>
+            <div class="col-md-2 col-sm-2 box0">
+                <div class="box1">
+                    <span class="bi bi-coin"></span>
+                    <h3>Ventas</h3>
+                </div>
+                <p>Cantidad en total de  ventas : <strong>{{ total_ventas or 0 }}</strong> </p>
+            </div>
+            <div class="col-md-2 col-sm-2 box0">
+                <div class="box1">
+                    <span class="bi bi-bag-check"></span>
+                    <h3>Marcas</h3>
+                </div>
+                <p>Cantidad en marcas : <strong>{{ total_marca  }}</strong></p>
+            </div>
+            <div class="col-md-2 col-sm-2 box0">
+                <div class="box1">
+                    <span class="bi bi-pc-display"></span>
+                    <h3>Servicio</h3>
+                </div>
+                <p>Cantidad de Servicios : <strong>{{ total_servicio  }}</strong></p>
+            </div>
+
+        </div><!-- /row mt -->
         <div class="tab-pane" id="chartjs">
             <div class="row mt">
                 <div class="col-lg-6">
                     <div class="content-panel">
                         <h4><i class="fa fa-angle-right"></i>Ventas mensuales </h4>
-                        <div class="panel-body text-center" >
+                        <div class="panel-body text-center">
                             <div hidden>
                                 <table class="table table-bordered table-hover" id="myTable">
                                     <thead>
@@ -27,7 +66,7 @@
                                                 {{ venta.fecha }}
                                             </td>
                                             <td class="mes">
-    
+
                                             </td>
                                             <td>
                                                 {{ venta.productos[0].total }}
@@ -45,7 +84,7 @@
                     <div class="content-panel">
                         <h4><i class="fa fa-angle-right"></i>Productos</h4>
                         <div class="panel-body text-center">
-                            <div hidden >
+                            <div hidden>
                                 <table class="table table-bordered table-hover" id="myTable2">
                                     <thead>
                                         <tr>
@@ -63,11 +102,11 @@
                                             <td>
                                                 {{producto.nombre}}
                                             </td>
-                                            <td >
+                                            <td>
                                                 {{producto.cantidad}}
                                             </td>
                                         </tr>
-                                        
+
                                         {% endfor %}
                                     </tbody>
                                 </table>
@@ -82,7 +121,7 @@
                     <div class="content-panel">
                         <h4><i class="fa fa-angle-right"></i>Producto más vendido</h4>
                         <div class="panel-body text-center">
-                            <div  hidden>
+                            <div hidden>
                                 <table class="table table-bordered table-hover" id="myTable3">
                                     <thead>
                                         <tr>
@@ -104,11 +143,11 @@
                                             <td>
                                                 {{principal.productos[1].n_producto}}
                                             </td>
-                                            <td >
+                                            <td>
                                                 {{principal.productos[1].cantidad}}
                                             </td>
                                         </tr>
-                                        
+
                                         {% endfor %}
                                     </tbody>
                                 </table>
@@ -117,12 +156,12 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-6">
                     <div class="content-panel">
                         <h4><i class="fa fa-angle-right"></i>Compras de clientes</h4>
                         <div class="panel-body text-center">
-                            <div hidden >
+                            <div hidden>
                                 <table class="table table-bordered table-hover" id="myTable4">
                                     <thead>
                                         <tr>
@@ -148,21 +187,21 @@
                                             <td>
                                                 {{cliente.cedula}}
                                             </td>
-                                            <td >
+                                            <td>
                                                 {{cliente.productos[0].total}}
                                             </td>
                                         </tr>
-                                        
+
                                         {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
                             <canvas id="polarArea" height="300" width="300"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- page end-->
+            <!-- page end-->
     </section>
 </section><!-- /MAIN CONTENT -->
 
